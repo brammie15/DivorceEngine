@@ -6,7 +6,7 @@
 #include <algorithm>
 #include "Scene2.h"
 
-#include "../stb_image.h"
+#include "stb_image.h"
 
 #include "../utils.h"
 
@@ -15,13 +15,13 @@
 Scene2::Scene2() {
     texture = Texture();
     texture.LoadTexture("resources/vehicle_diffuse.jpg");
-//    texture.type = "diffuse";
+    texture.type = "texture_diffuse";
 
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     Utils::ParseOBJ("resources/vehicle.obj", vertices, indices, false);
     std::vector<Texture> textures;
-//    textures.push_back(texture);
+    textures.push_back(texture);
 
     mesh = new Mesh(vertices, indices, textures);
 
@@ -62,7 +62,7 @@ void Scene2::Render() {
 
     shader->setVec3("aColor", glm::vec3(1.0f, 0.0f, 1.0f));
 
-    texture.BindTexture();
+//    texture.BindTexture();
 
     mesh->Draw(*shader);
 
@@ -125,7 +125,7 @@ void Scene2::ImGuiRender() {
 
     m_camera.ProcessImGui();
 
-    texture.DrawImGui();
+//    texture.DrawImGui();
 }
 
 void Scene2::ProcessMouseInput(GLFWwindow *window, double xpos, double ypos) {

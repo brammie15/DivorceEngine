@@ -24,7 +24,7 @@ macro(LinkImGui TARGET ACCESS)
             ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
     )
     # Link ImGui to your target
-    target_link_libraries(${TARGET} PRIVATE imgui)
+    target_link_libraries(${TARGET} ${ACCESS} imgui)
 
     # Include ImGui headers
     target_include_directories(imgui PUBLIC ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends)

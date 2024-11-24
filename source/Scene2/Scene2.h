@@ -11,12 +11,12 @@
 #include <array>
 #include <vector>
 
-#include "../Scene.h"
-#include "../DataTypes.h"
-#include "../Shader.h"
-#include "../Camera.h"
-#include "../Texture.h"
-#include "../Mesh.h"
+#include "Scene.h"
+#include "DataTypes.h"
+#include "Shader.h"
+#include "Camera.h"
+#include "Texture.h"
+#include "Mesh.h"
 
 
 class Scene2 : public Scene {

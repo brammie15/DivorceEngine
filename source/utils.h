@@ -9,7 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <glm/glm.hpp>
-#include "DataTypes.h"
+#include "Datatypes.h"
 
 namespace Utils {
     static float cross(const glm::vec2& u, const glm::vec2& v) {

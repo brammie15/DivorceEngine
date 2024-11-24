@@ -19,7 +19,7 @@ public:
     std::vector<unsigned int> indices;
     std::vector<Texture >      textures;
 
-    Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures);
+    Mesh(const std::vector<Vertex> vertices, const std::vector<unsigned int> indices, const std::vector<Texture> textures);
     void Draw(Shader &shader);
 private:
     //  render data

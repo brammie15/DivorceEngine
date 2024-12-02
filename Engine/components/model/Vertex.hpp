@@ -1,0 +1,9 @@
+#ifndef SUPEREPIKGAME_VERTEX_HPP
+#define SUPEREPIKGAME_VERTEX_HPP
+
+#include <glm/glm.hpp>
+
+
+
+
+#endif //SUPEREPIKGAME_VERTEX_HPP

@@ -9,23 +9,32 @@
 #include "DataTypes.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Transform.h"
 
 #include <vector>
+#include <memory>
+
 
 class Mesh {
 public:
-    // mesh data
-    std::vector<Vertex>       vertices;
-    std::vector<unsigned int> indices;
-    std::vector<Texture >      textures;
+    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, const std::vector<std::shared_ptr<Texture>> &textures,
+         const Transform &transform);
 
-    Mesh(const std::vector<Vertex> vertices, const std::vector<unsigned int> indices, const std::vector<Texture> textures);
+// mesh data
+    std::vector<Vertex> m_verticies;
+    std::vector<unsigned int> m_indices;
+    std::vector<std::shared_ptr<Texture>> m_textures;
+
     void Draw(Shader &shader);
+
 private:
     //  render data
     unsigned int VAO, VBO, EBO;
 
+    Transform m_transform;
+
     void setupMesh();
+
 };
 
 

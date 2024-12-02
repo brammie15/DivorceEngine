@@ -2,26 +2,50 @@
 
 set(ENGINE_NAME "Fovy")
 
-set(ENGINE_SOURCES
-    "./FrameBuffer.cpp"
-    "./Shader.cpp"
-    "./Texture.cpp"
-    "./Mesh.cpp"
-    "./Scene.cpp"
-    "./Camera.cpp"
+
+set(ENGINE_FILES
+    "core/CoreEngine.cpp"
+    "core/Game.cpp"
+    "core/InputHandler.cpp"
+    "core/RenderingEngine.cpp"
+    "core/Window.cpp"
+
+    "scenegraph/Node.cpp"
+    "scenegraph/Transform.cpp"
+
+    "shader/Shader.cpp"
+    "shader/BasicShader.cpp"
+
+    "texture/Texture.cpp"
+
+    "components/Component.cpp"
+
+    "components/camera/Camera.cpp"
+
+    "components/model/Material.cpp"
+    "components/model/Vertex.hpp"
+    "components/model/Mesh.cpp"
+    "components/model/Model.cpp"
+
+    "components/renderer/Renderer.cpp"
 
 )
-set(ENGINE_INCLUDES
-    "./FrameBuffer.h"
-    "./DataTypes.h"
-    "./Shader.h"
-    "./Texture.h"
-    "./Mesh.h"
-    "./Scene.h"
-    "./Camera.h"
-)
 
-add_library(${ENGINE_NAME} STATIC ${ENGINE_SOURCES} ${ENGINE_INCLUDES})
+# includes
+
+include_directories("core")
+include_directories("scenegraph")
+include_directories("shader")
+include_directories("texture")
+
+include_directories("components")
+include_directories("components/camera")
+include_directories("components/model")
+include_directories("components/renderer")
+
+
+
+add_library(${ENGINE_NAME} STATIC ${ENGINE_FILES})
 
 target_include_directories(${ENGINE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

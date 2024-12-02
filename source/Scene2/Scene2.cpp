@@ -11,19 +11,22 @@
 #include "../utils.h"
 
 #include "imgui.h"
+#include "ResourceManager.h"
 
 Scene2::Scene2() {
-    texture = Texture();
-    texture.LoadTexture("resources/vehicle_diffuse.jpg");
-    texture.type = "texture_diffuse";
+//    texture = ResourceManager::GetInstance().LoadTexture("resources/vehicle_diffuse.png");
+//    texture->type = "texture_diffuse";
 
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
-    Utils::ParseOBJ("resources/vehicle.obj", vertices, indices, false);
-    std::vector<Texture> textures;
-    textures.push_back(texture);
+//    std::vector<Vertex> vertices;
+//    std::vector<unsigned int> indices;
+//    Utils::ParseOBJ("resources/vehicle.obj", vertices, indices, false);
+//    std::vector<std::shared_ptr<Texture>> textures;
+//    textures.push_back(texture);
+//
+//    mesh = new Mesh(vertices, indices, textures);
+//    stbi_set_flip_vertically_on_load(true);
 
-    mesh = new Mesh(vertices, indices, textures);
+    m_model = new Model("resources/Monkey/monkey.fbx");
 
 //    shader = new Shader("shaders/solidColorObject.vert", "shaders/solidColorObject.frag");
 
@@ -35,6 +38,8 @@ void Scene2::ProcessInput(GLFWwindow *window, double deltaTime) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
+
+
 
     m_camera.ProcessInput(window, deltaTime);
 }
@@ -64,11 +69,11 @@ void Scene2::Render() {
 
 //    texture.BindTexture();
 
-    mesh->Draw(*shader);
+//    mesh->Draw(*shader);
 
-
-
+    m_model->Draw(*shader);
 }
+
 
 void Scene2::Update(double deltaTime) {
 
@@ -125,7 +130,7 @@ void Scene2::ImGuiRender() {
 
     m_camera.ProcessImGui();
 
-//    texture.DrawImGui();
+//    texture->DrawImGui();
 }
 
 void Scene2::ProcessMouseInput(GLFWwindow *window, double xpos, double ypos) {

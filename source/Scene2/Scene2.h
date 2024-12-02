@@ -10,6 +10,7 @@
 
 #include <array>
 #include <vector>
+#include <memory>
 
 #include "Scene.h"
 #include "DataTypes.h"
@@ -17,6 +18,7 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "Mesh.h"
+#include "Model.h"
 
 
 class Scene2 : public Scene {
@@ -52,7 +54,9 @@ private:
     Shader *shader = nullptr;
     Mesh *mesh = nullptr;
 
-    Texture texture;
+    std::shared_ptr<Texture> texture;
+
+    Model* m_model{nullptr};
 
     Camera m_camera;
 

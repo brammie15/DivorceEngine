@@ -12,10 +12,22 @@ macro(LinkASSIMP TARGET ACCESS)
     if (NOT assimp_POPULATED)
         FetchContent_Populate(assimp)
 
+        set(DASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "Disable all importers by default" FORCE)
+        set(DASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF CACHE BOOL "Disable all exporters by default" FORCE)
+
+        set(ASSIMP_BUILD_OBJ_IMPORTER   ON CACHE BOOL "Build OBJ importer" FORCE)
+        set(ASSIMP_BUILD_FBX_IMPORTER   ON CACHE BOOL "Build FBX importer" FORCE)
+
         # Just configure GLFW only
         set(ASSIMP_BUILD_ASSIMP_TOOLS   OFF CACHE BOOL "Build ASSIMP tools" FORCE)
         set(ASSIMP_BUILD_TESTS          OFF CACHE BOOL "Build tests" FORCE)
         set(ASSIMP_INSTALL              OFF CACHE BOOL "Configure an install for ASSIMP" FORCE)
+#        -DASSIMP_BUILD_NO_EXPORT
+
+        set(ASSIMP_BUILD_ZLIB           ON CACHE BOOL "Build zlib" FORCE)
+        set(DASSIMP_BUILD_NO_EXPORT     ON CACHE BOOL "Disable exporting of symbols" FORCE)
+
+
 
         # This excludes assimp from being rebuilt when ALL_BUILD is built
         # it will only be built when a target is built that has a dependency on assimp

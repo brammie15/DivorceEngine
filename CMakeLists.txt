@@ -50,13 +50,15 @@ add_subdirectory(Engine)
 
 set(sources
         ${SOURCE_DIR}/main.cpp
-        ${SOURCE_DIR}/Scene1/Scene1.cpp
-        ${SOURCE_DIR}/Scene2/Scene2.cpp
+        ${SOURCE_DIR}/TestGame.cpp
+#        ${SOURCE_DIR}/Scene1/Scene1.cpp
+#        ${SOURCE_DIR}/Scene2/Scene2.cpp
 )
 
 set(includes
-        ${SOURCE_DIR}/Scene1/Scene1.h
-        ${SOURCE_DIR}/Scene2/Scene2.h
+        ${SOURCE_DIR}/TestGame.h
+#        ${SOURCE_DIR}/Scene1/Scene1.h
+#        ${SOURCE_DIR}/Scene2/Scene2.h
 )
 
 add_executable(${PROJECT_NAME} ${sources} ${includes})

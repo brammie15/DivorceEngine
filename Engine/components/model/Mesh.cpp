@@ -39,6 +39,8 @@ void Mesh::generateMesh(std::vector<Vertex> vertices, std::vector<unsigned int> 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
+    std::cout << "first texture coord: " << vertices[0].m_textureCoord.x << ", " << vertices[0].m_textureCoord.y << std::endl;
+
     // VERTEX ATTRIBUTE POINTERS (POSITION, TEXTURE COORDINATES, NORMALS)
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_textureCoord));
@@ -55,11 +57,6 @@ void Mesh::draw() const {
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
 
-    //Check if their enabled
-    std::cout << "Vertex Attribute 0: " << glIsEnabled(GL_VERTEX_ATTRIB_ARRAY_ENABLED) << std::endl;
-    std::cout << "Vertex Attribute 1: " << glIsEnabled(GL_VERTEX_ATTRIB_ARRAY_ENABLED) << std::endl;
-    std::cout << "Vertex Attribute 2: " << glIsEnabled(GL_VERTEX_ATTRIB_ARRAY_ENABLED) << std::endl;
-
     // DRAW THE DAMN TRIANGLES
     glDrawElements(GL_TRIANGLES, m_size, GL_UNSIGNED_INT, 0);
 
@@ -70,4 +67,8 @@ void Mesh::draw() const {
 
     // UNBIND VERTEX ARRAY
     glBindVertexArray(0);
+}
+
+void Mesh::generateMesh(const LoadedModel &model) {
+    generateMesh(model.vertices, model.indices);
 }

@@ -61,16 +61,22 @@ void TestGame::init(RenderingEngine* renderingEngine)
 
     Camera* mainCamera = new Camera(glm::radians(45.0f), (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
 
-    Model* testModel1 = new Model(new Mesh(vertices, indices), new Material(new Texture("resources/textures/kobeSilly.jpg")));
-    Model* testModel2 = new Model(new Mesh(vertices, indices), new Material(new Texture("resources/textures/kobeSilly.jpg")));
-    Model* testModel3 = new Model(new Mesh(vertices, indices), new Material(new Texture("resources/textures/kobeSilly.jpg")));
+
+    Model* testModel1 = new Model(new Mesh(vertices, indices), new Material(new Texture("resources/textures/TextureNotFound.jpg")));
+
+    ModelLoader loader;
+    const auto loadedModel = loader.loadModel("resources/AirFryer.obj");
+    const auto loadedLights = loader.loadModel("resources/lowpoly_bunny.obj");
+
+
+    Model* testModel2 = new Model(new Mesh(loadedLights.vertices, loadedLights.indices), new Material(new Texture("resources/textures/TextureNotFound.jpg")));
+    Model* testModel3 = new Model(new Mesh(loadedModel.vertices, loadedModel.indices), new Material(new Texture("resources/textures/TextureNotFound.jpg")));
 
     Shader* shader = BasicShader::getInstance();
 
     Node* cameraNode = new Node();
     cameraNode->addComponent(mainCamera);
     cameraNode->getTransform().setPos(glm::vec3(0.0f, 0.0f, -5.0f));
-
 
     cubeNodeTest = new Node();
     cubeNodeTest->addComponent(new Renderer(testModel1, shader));
@@ -84,18 +90,22 @@ void TestGame::init(RenderingEngine* renderingEngine)
     cubeNodeTest3 = new Node();
     cubeNodeTest3->addComponent(new Renderer(testModel3, shader));
     cubeNodeTest3->getTransform().setPos(glm::vec3(0, 0, 3));
+    float scale = 10;
+    cubeNodeTest3->getTransform().setScale(glm::vec3(scale, scale, scale));
+
+    cubeNodeTest2->setParent(cubeNodeTest3);
 
     addToScene(cameraNode);
-    addToScene(cubeNodeTest);
-//    addToScene(cubeNodeTest2);
-//    addToScene(cubeNodeTest3);
+//    addToScene(cubeNodeTest);
+    addToScene(cubeNodeTest2);
+    addToScene(cubeNodeTest3);
 }
 
 void TestGame::update(float delta)
 {
-    cubeNodeTest->getTransform().rotate(glm::vec3(0, 1, 0), delta);
+//    cubeNodeTest->getTransform().rotate(glm::vec3(0, 1, 0), delta);
     cubeNodeTest2->getTransform().rotate(glm::vec3(1, 0, 0), delta);
-    cubeNodeTest3->getTransform().rotate(glm::vec3(1, 0, 1), delta);
+    cubeNodeTest3->getTransform().setPos(cubeNodeTest3->getTransform().getPos() + glm::vec3(0, 0, 0.1f));
 }
 
 void TestGame::render(RenderingEngine* renderingEngine) {

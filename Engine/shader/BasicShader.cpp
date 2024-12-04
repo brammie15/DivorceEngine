@@ -7,6 +7,7 @@ BasicShader::BasicShader()
 
     setAttributeLocation("position", 0);
     setAttributeLocation("texCoord", 1);
+    setAttributeLocation("normal", 2);
 
     compileShader();
 

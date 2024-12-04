@@ -27,18 +27,20 @@ void Transform::update() {
 		m_old_rot = m_rot;
 		m_old_scale = m_scale;
 
-		if (m_parent)
+		if (m_parent){
 			m_parentMatrix = m_parent->getWorldMatrix();
+            m_pos = getTransformedPos();
+        }
 	}
 }
 
 glm::mat4 Transform::getWorldMatrix() const {
 	glm::mat4 outMatrix = glm::mat4(1.0f);
     outMatrix = glm::translate(outMatrix, m_pos);
-//    outMatrix = outMatrix * glm::mat4_cast(m_rot);
-//    outMatrix = glm::scale(outMatrix, m_scale);
-//    return outMatrix;
-    return glm::mat4(1.0f);
+    outMatrix = outMatrix * glm::mat4_cast(m_rot);
+    outMatrix = glm::scale(outMatrix, m_scale);
+    return outMatrix;
+//    return glm::mat4(1.0f);
 }
 
 glm::vec3 Transform::getTransformedPos() {
@@ -122,6 +124,8 @@ Transform* Transform::getParent()
 void Transform::setPos(const glm::vec3 & pos)
 {
 	m_pos = pos;
+    //Update the parent
+    update();
 }
 
 void Transform::setRot(const glm::quat & rot)

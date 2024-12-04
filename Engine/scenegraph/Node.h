@@ -29,6 +29,20 @@ public:
 
 	void setParent(Node* parent);
 
+    //Get Component by type
+    template <typename T>
+    T* getComponent()
+    {
+        for (auto component : m_components)
+        {
+            if (T* t = dynamic_cast<T*>(component))
+            {
+                return t;
+            }
+        }
+        return nullptr;
+    }
+
 private:
 	Node* m_parent;
 	std::vector<Node*> m_children;

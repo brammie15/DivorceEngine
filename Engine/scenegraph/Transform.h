@@ -6,65 +6,80 @@
 #include <glm/gtx/transform.hpp>
 #include "../core/Window.h"
 
-class Transform
-{
+class Transform {
 
 public:
-	Transform(
-		const glm::vec3& pos = glm::vec3(0.0f, 0.0f, 0.0f),
-		const glm::quat& rot = glm::quat(0.0f, 0.0f, 0.0f, 1.0f),
-		const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)
-	);
-	virtual ~Transform() {};
+    Transform(
+            const glm::vec3 &pos = glm::vec3(0.0f, 0.0f, 0.0f),
+            const glm::quat &rot = glm::quat(0.0f, 0.0f, 0.0f, 1.0f),
+            const glm::vec3 &scale = glm::vec3(1.0f, 1.0f, 1.0f)
+    );
 
-	bool hasChanged() const;
+    virtual ~Transform() {};
 
-	void update();
+    bool hasChanged() const;
 
-	void setPos(const glm::vec3& pos);
-	void setRot(const glm::quat& rot);
-	void setScale(const glm::vec3& scale);
+    void update();
 
-	Transform* getParent();
-	void setParent(Transform* parent);
+    void setPos(const glm::vec3 &pos);
 
-	//void rotate(const float& angle, const glm::vec3& axis);
-	void rotate(const glm::vec3& axis, float angle);
-	void rotate(glm::quat rotation);
-	glm::vec3 rotate(glm::vec3 axis, glm::quat rotation);
+    void setRot(const glm::quat &rot);
 
-	glm::vec3& getPos();
-	glm::quat& getRot();
-	glm::vec3& getScale();
+    void setScale(const glm::vec3 &scale);
 
-	glm::vec3 getRight();
-	glm::vec3 getLeft();
-	glm::vec3 getUp();
-	glm::vec3 getDown();
-	glm::vec3 getForward();
-	glm::vec3 getBackward();
+    Transform *getParent();
 
-	glm::vec3 getTransformedPos();
-	glm::quat getTransformedRot();
+    void setParent(Transform *parent);
 
-	glm::mat4 getWorldMatrix() const;
+    //void rotate(const float& angle, const glm::vec3& axis);
+    void rotate(const glm::vec3 &axis, float angle);
+
+    void rotate(glm::quat rotation);
+
+    glm::vec3 rotate(glm::vec3 axis, glm::quat rotation);
+
+    glm::vec3 &getPos();
+
+    glm::quat &getRot();
+
+    glm::vec3 &getScale();
+
+    glm::vec3 getRight();
+
+    glm::vec3 getLeft();
+
+    glm::vec3 getUp();
+
+    glm::vec3 getDown();
+
+    glm::vec3 getForward();
+
+    glm::vec3 getBackward();
+
+    glm::vec3 getTransformedPos();
+
+    glm::quat getTransformedRot();
+
+    glm::mat4 getWorldMatrix() const;
 
 private:
-	glm::vec3 m_pos;
-	glm::quat m_rot;
-	glm::vec3 m_scale;
+    glm::vec3 m_pos;
+    glm::quat m_rot;
+    glm::vec3 m_scale;
 
-	glm::vec3 m_forward;
+    glm::vec3 m_forward;
 
-	mutable glm::mat4 m_parentMatrix;
-	mutable glm::vec3 m_old_pos;
-	mutable glm::quat m_old_rot;
-	mutable glm::vec3 m_old_scale;
+    glm::mat4 m_parentMatrix;
+    glm::vec3 m_old_pos;
+    glm::quat m_old_rot;
+    glm::vec3 m_old_scale;
 
-	Transform* m_parent;
+    Transform *m_parent;
 
-	glm::quat mul(glm::quat q, glm::vec3 v);
-	glm::mat4 translate(const glm::vec3& v) const;
-	glm::mat4 scale(const glm::vec3&v) const;
+    glm::quat mul(glm::quat q, glm::vec3 v);
+
+    glm::mat4 translate(const glm::vec3 &v) const;
+
+    glm::mat4 scale(const glm::vec3 &v) const;
 
 };

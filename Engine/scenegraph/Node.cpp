@@ -19,7 +19,6 @@ void Node::addComponent(Component* component)
 
 void Node::input(float delta)
 {
-	m_transform.update();
 	for (unsigned int i = 0; i < m_components.size(); i++)
 	{
 		m_components[i]->input(delta);
@@ -33,6 +32,7 @@ void Node::input(float delta)
 
 void Node::update(float delta)
 {
+    m_transform.update();
 	for (unsigned int i = 0; i < m_components.size(); i++)
 	{
 		m_components[i]->update(delta);
@@ -83,4 +83,5 @@ std::vector<Node*> Node::getChildren()
 void Node::setParent(Node* parent)
 {
 	m_parent = parent;
+    m_transform.setParent(parent ? &parent->getTransform() : nullptr);
 }

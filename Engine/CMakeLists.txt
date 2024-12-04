@@ -23,11 +23,15 @@ set(ENGINE_FILES
     "components/camera/Camera.cpp"
 
     "components/model/Material.cpp"
-    "components/model/Vertex.hpp"
+    "components/model/Vertex.cpp"
     "components/model/Mesh.cpp"
     "components/model/Model.cpp"
 
     "components/renderer/Renderer.cpp"
+
+    "utils/ModelUtils.cpp"
+
+
 
 )
 
@@ -42,6 +46,8 @@ include_directories("components")
 include_directories("components/camera")
 include_directories("components/model")
 include_directories("components/renderer")
+
+include_directories("utils")
 
 
 
@@ -78,6 +84,9 @@ target_link_libraries(imgui PUBLIC glfw)
 include(${CMAKE_DIR}/LinkGLM.cmake)
 LinkGLM(${ENGINE_NAME} PUBLIC)
 
+include(${CMAKE_DIR}/LinkTinyObjLoader.cmake)
+LinkTinyObjLoader(${ENGINE_NAME} PUBLIC)
+
 
 find_package(OpenGL REQUIRED)
 if (OpenGL_FOUND)
@@ -87,7 +96,7 @@ else()
     message(FATAL_ERROR "OpenGL was not found on the system")
 endif()
 
-add_definitions(-DASSIMP_BUILD_NO_IFC_IMPORTER)
-include(${CMAKE_DIR}/LinkASSIMP.cmake)
-LinkASSIMP(${ENGINE_NAME} PUBLIC)
+#add_definitions(-DASSIMP_BUILD_NO_IFC_IMPORTER)
+#include(${CMAKE_DIR}/LinkASSIMP.cmake)
+#LinkASSIMP(${ENGINE_NAME} PUBLIC)
 
